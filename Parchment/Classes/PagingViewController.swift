@@ -725,6 +725,11 @@ extension PagingViewController: PagingMenuDelegate {
             let dataSource = infiniteDataSource,
             shouldTransition(state.currentPagingItem, pagingItem)
         else {
+            if case .forward = direction {
+                pageViewController.scrollForward()
+            } else {
+                pageViewController.scrollReverse()
+            }
             return
         }
         switch direction {
