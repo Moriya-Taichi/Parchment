@@ -283,7 +283,7 @@ open class PagingViewController:
         }
     }
     
-    public var shouldTransition: ((_ currentItem: PagingItem, _ nextItem: PagingItem) -> Bool) = { _,_ in return true }
+    public var shouldTransition: ((_ currentItem: PagingItem?, _ nextItem: PagingItem) -> Bool) = { _,_ in return true }
 
     // MARK: Private Properties
 
@@ -723,8 +723,7 @@ extension PagingViewController: PagingMenuDelegate {
     public func selectContent(pagingItem: PagingItem, direction: PagingDirection, animated: Bool) {
         guard
             let dataSource = infiniteDataSource,
-            let currentPagingItem = state.currentPagingItem,
-            shouldTransition(currentPagingItem, pagingItem)
+            shouldTransition(state.currentPagingItem, pagingItem)
         else {
             return
         }
